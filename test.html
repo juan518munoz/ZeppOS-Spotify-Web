@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Read URL and Display Code</title>
+  <style>
+    .code-box {
+      border: 1px solid gray;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Read URL and Display Code</h1>
+  <div class="code-box">
+    <pre id="code"></pre>
+    <button id="copy-button">Copy</button>
+  </div>
+  <script>
+    // Get the code parameter from the URL and display it
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+    if (code) {
+      document.getElementById("code").innerHTML = code;
+    } else {
+      document.getElementById("code").innerHTML = "No code found in URL.";
+    }
+
+    // Add an event listener to the copy button to copy the code to the clipboard
+    document.getElementById("copy-button").addEventListener("click", function() {
+      const codeText = document.getElementById("code").innerText;
+      navigator.clipboard.writeText(codeText).then(function() {
+        console.log("Code copied to clipboard.");
+      });
+    });
+  </script>
+</body>
+</html>
